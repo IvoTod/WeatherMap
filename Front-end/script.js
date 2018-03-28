@@ -31,31 +31,30 @@ function initMap() {
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		success: function( locations ) {
 			for (var i = 0; i < locations.length; i++) {
-				var markerID = locations[i].id;
 				var marker = new google.maps.Marker({
 					animation: google.maps.Animation.DROP,
 					position: {'lat': locations[i].latitude, 'lng': locations[i].longitude},
 					map: map,
-					id: markerID,
+					id: locations[i].id,
 					name: locations[i].name 
 				});
-			}
-			google.maps.event.addListener(marker, 'click', function() { 
-				$.ajax({type:"GET", 
-					crossDomain: true, 
-					url:"http://87.120.33.83:8080/WeatherMap/url/Get/station?id=" + markerID, 
-					contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					success: function( data ) {
-						$("#temperature span").text(data.temperature);
-						$("#humidity span").text(data.humidity);
-						$("#apm span").text(data.apm);
-						$("#airPressure span").text(data.airPressure);
-					},
-					error: function() {
-						console.log("error");
-					}
+				google.maps.event.addListener(marker, 'click', function(test) { 
+					$.ajax({type:"GET", 
+						crossDomain: true, 
+						url:"http://87.120.33.83:8080/WeatherMap/url/Get/station?id=" + this.id, 
+						contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+						success: function( data ) {
+							$("#temperature span").text(data.temperature);
+							$("#humidity span").text(data.humidity);
+							$("#apm span").text(data.apm);
+							$("#airPressure span").text(data.airPressure);
+						},
+						error: function() {
+							console.log("error");
+						}
+					});
 				});
-			});
+			}
 		},
 		error: function() {
 			console.log("error");
