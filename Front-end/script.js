@@ -20,40 +20,47 @@
 // }
 
 function initMap() {
-        var uluru = {lat: -37.663712, lng: 144.844788, name: "Melbourne"};
-        var marker2 = {lat: 36.114647, lng: -115.172813, name: "Las Vegas"};
-        var marker3 = {lat: 52.520008, lng: 13.404954, name: "Berlin"};
-        var marker4 = {lat: 51.509865, lng: -0.118092, name: "London"};
-        var marker5 = {lat: 47.751076, lng: -120.740135, name: "Washington"};
-        var marker6 = {lat: 55.751244, lng: 37.618423, name: "Moscow"};
-        var marker7 = {lat: -29.851847, lng: 30.993368, name: "South Africa"};
-        var locations = [];
-        locations.push(uluru);
-        locations.push(marker2);
-        locations.push(marker3);
-        locations.push(marker4);
-        locations.push(marker5);
-        locations.push(marker6);
-        locations.push(marker7);
+	locations = [];
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 3,
-          center: uluru
+          center: {lat: 0, lng:0}
         });
-        for (var i = 0; i < locations.length; i++) {
-            var marker = new google.maps.Marker({
-                animation: google.maps.Animation.DROP,
-                position: locations[i],
-                map: map,
-                id: i,
-                name: locations[i].name 
-            });
-            google.maps.event.addListener(marker, 'click', function() { 
-                $("#id span").text(this.id);
-                $("#name span").text(this.name);
-                $("#latitude span").text(this.position.lat);
-                $("#longitude span").text(this.position.lng);
-            });
-        }
+	$.ajax({type:"GET", 
+		crossDomain: true, 
+		url:"http://87.120.33.83:8080/WeatherMap/url/Get/all", 
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		success: function( locations ) {
+			for (var i = 0; i < locations.length; i++) {
+				var markerID = locations[i].id;
+				var marker = new google.maps.Marker({
+					animation: google.maps.Animation.DROP,
+					position: {'lat': locations[i].latitude, 'lng': locations[i].longitude},
+					map: map,
+					id: markerID,
+					name: locations[i].name 
+				});
+			}
+			google.maps.event.addListener(marker, 'click', function() { 
+				$.ajax({type:"GET", 
+					crossDomain: true, 
+					url:"http://87.120.33.83:8080/WeatherMap/url/Get/station?id=" + markerID, 
+					contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+					success: function( data ) {
+						$("#temperature span").text(data.temperature);
+						$("#humidity span").text(data.humidity);
+						$("#apm span").text(data.apm);
+						$("#airPressure span").text(data.airPressure);
+					},
+					error: function() {
+						console.log("error");
+					}
+				});
+			});
+		},
+		error: function() {
+			console.log("error");
+		}
+	});
 }
 
 $(document).ready(function () {
