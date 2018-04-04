@@ -2,26 +2,29 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="script.js"></script>
 	<script async defer
     	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARA_KZw_ksxLf7z42TufGfPcJtikPvXgw&callback=initMap">
     </script>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>	
 	<title>Air station</title>
 </head>
 <body>
 	<div id="map"></div>
 	<div class="full-width">
-		<div class="quarter-width box-left" id="temperature">
+		<div class="fifth-width box-left" id="name">
 			<span></span>
 		</div>
-		<div class="quarter-width box-center" id="humidity">
+		<div class="fifth-width box-center" id="airPressure">
 			<span></span>
 		</div>
-		<div class="quarter-width box-center" id="apm">
+		<div class="fifth-width box-center" id="temperature">
 			<span></span>
 		</div>
-		<div class="quarter-width box-right" id="airPressure">
+		<div class="fifth-width box-center" id="humidity">
+			<span></span>
+		</div>
+		<div class="fifth-width box-right" id="apm">
 			<span></span>
 		</div>
 	</div>

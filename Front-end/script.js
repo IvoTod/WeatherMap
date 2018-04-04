@@ -1,67 +1,45 @@
-// function openCity(evt, cityName) {
-//     // Declare all variables
-//     var i, tabcontent, tablinks;
-
-//     // Get all elements with class="tabcontent" and hide them
-//     tabcontent = document.getElementsByClassName("tabcontent");
-//     for (i = 0; i < tabcontent.length; i++) {
-//         tabcontent[i].style.display = "none";
-//     }
-
-//     // Get all elements with class="tablinks" and remove the class "active"
-//     tablinks = document.getElementsByClassName("tablinks");
-//     for (i = 0; i < tablinks.length; i++) {
-//         tablinks[i].className = tablinks[i].className.replace(" active", "");
-//     }
-
-//     // Show the current tab, and add an "active" class to the button that opened the tab
-//     document.getElementById(cityName).style.display = "block";
-//     evt.currentTarget.className += " active";
-// }
-
 function initMap() {
-	locations = [];
+        var uluru = {lat: -37.663712, lng: 144.844788, name: "Melbourne"};
+        var marker2 = {lat: 36.114647, lng: -115.172813, name: "Las Vegas"};
+        var marker3 = {lat: 52.520008, lng: 13.404954, name: "Berlin"};
+        var marker4 = {lat: 51.509865, lng: -0.118092, name: "London"};
+        var marker5 = {lat: 47.751076, lng: -120.740135, name: "Washington"};
+        var marker6 = {lat: 55.751244, lng: 37.618423, name: "Moscow"};
+        var marker7 = {lat: -29.851847, lng: 30.993368, name: "South Africa"};
+        var locations = [];
+        locations.push(uluru);
+        locations.push(marker2);
+        locations.push(marker3);
+        locations.push(marker4);
+        locations.push(marker5);
+        locations.push(marker6);
+        locations.push(marker7);
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 3,
-          center: {lat: 0, lng:0}
+          center: uluru
         });
-	$.ajax({type:"GET", 
-		crossDomain: true, 
-		url:"http://87.120.33.83:8080/WeatherMap/url/Get/all", 
-		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		success: function( locations ) {
-			for (var i = 0; i < locations.length; i++) {
-				var marker = new google.maps.Marker({
-					animation: google.maps.Animation.DROP,
-					position: {'lat': locations[i].latitude, 'lng': locations[i].longitude},
-					map: map,
-					id: locations[i].id,
-					name: locations[i].name 
-				});
-				google.maps.event.addListener(marker, 'click', function(test) { 
-					$.ajax({type:"GET", 
-						crossDomain: true, 
-						url:"http://87.120.33.83:8080/WeatherMap/url/Get/station?id=" + this.id, 
-						contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-						success: function( data ) {
-							$("#temperature span").text(data.temperature);
-							$("#humidity span").text(data.humidity);
-							$("#apm span").text(data.apm);
-							$("#airPressure span").text(data.airPressure);
-						},
-						error: function() {
-							console.log("error");
-						}
-					});
-				});
-			}
-		},
-		error: function() {
-			console.log("error");
-		}
-	});
+        for (var i = 0; i < locations.length; i++) {
+            var marker = new google.maps.Marker({
+                animation: google.maps.Animation.DROP,
+                position: locations[i],
+                map: map,
+                id: i,
+                name: locations[i].name 
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                $.ajax({
+                    type: 'GET',
+                    url: "/WeatherMap/url/Get/average?id=" + this.id,
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            $("#name span").append("<br />" + this.name);
+                            $("#airPressure span").append("<br />" + data[i].airPressure);
+                            $("#temperature span").append("<br />" + data[i].temperature);
+                            $("#humidity span").append("<br />" + data[i].humidity);
+                            $("#apm span").append("<br />" + data[i].apm);
+                        }
+                    }
+                });
+            });
+        }
 }
-
-$(document).ready(function () {
-    initMap();
-});
