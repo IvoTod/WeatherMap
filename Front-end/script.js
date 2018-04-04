@@ -1,3 +1,21 @@
+function showTemperature() {
+    $("#pollution-button").removeClass("clicked");
+    $("#temperature-button").addClass("clicked");
+    $("#airPressure").hide();
+    $("#apm").hide();
+    $("#temperature").show();
+    $("#humidity").show();
+}
+
+function showPollution() {
+    $("#temperature-button").removeClass("clicked");
+    $("#pollution-button").addClass("clicked");
+    $("#temperature").hide();
+    $("#humidity").hide();
+    $("#airPressure").show();
+    $("#apm").show();
+}
+
 function initMap() {
         var uluru = {lat: -37.663712, lng: 144.844788, name: "Melbourne"};
         var marker2 = {lat: 36.114647, lng: -115.172813, name: "Las Vegas"};
@@ -27,17 +45,23 @@ function initMap() {
                 name: locations[i].name 
             });
             google.maps.event.addListener(marker, 'click', function() {
+                $("#name").text(this.name);
                 $.ajax({
                     type: 'GET',
                     url: "/WeatherMap/url/Get/average?id=" + this.id,
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
-                            $("#name span").append("<br />" + this.name);
-                            $("#airPressure span").append("<br />" + data[i].airPressure);
-                            $("#temperature span").append("<br />" + data[i].temperature);
-                            $("#humidity span").append("<br />" + data[i].humidity);
-                            $("#apm span").append("<br />" + data[i].apm);
+                            $("#hour").append("<br />" + data[i].hour);
+                            $("#airPressure").append("<br />" + data[i].airPressure);
+                            $("#temperature").append("<br />" + data[i].temperature);
+                            $("#humidity").append("<br />" + data[i].humidity);
+                            $("#apm").append("<br />" + data[i].apm);
                         }
+                        $("#hour").empty();
+                        $("#airPressure").empty();
+                        $("#temperature").empty();
+                        $("#humidity").empty();
+                        $("#apm").empty();
                     }
                 });
             });

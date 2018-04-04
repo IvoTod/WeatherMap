@@ -11,22 +11,35 @@
 </head>
 <body>
 	<div id="map"></div>
-	<div class="full-width">
-		<div class="fifth-width box-left" id="name">
-			<span></span>
+	<div class="full-width" style="margin-top: 5px">
+		<div class="fifth-width box" id="name">
 		</div>
-		<div class="fifth-width box-center" id="airPressure">
-			<span></span>
+	</div>
+	<div class="full-width" style="margin-top: 15px">
+		<div class="fifth-width box-left">
+			<div id="hour">
+			</div>
 		</div>
-		<div class="fifth-width box-center" id="temperature">
-			<span></span>
+		<div class="fifth-width box-center">
+			<div id="airPressure">
+			</div>
 		</div>
-		<div class="fifth-width box-center" id="humidity">
-			<span></span>
+		<div class="fifth-width box-center">
+			<div id="temperature">
+			</div>
 		</div>
-		<div class="fifth-width box-right" id="apm">
-			<span></span>
+		<div class="fifth-width box-center">
+			<div id="humidity">
+			</div>
 		</div>
+		<div class="fifth-width box-right">
+			<div id="apm">
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 15px">
+		<button type="button" onclick="showTemperature()" id="temperature-button">Temperature</button>
+		<button type="button" onclick="showPollution()" id="pollution-button">Pollution</button>
 	</div>
 </body>
 </html>

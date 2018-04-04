@@ -9,8 +9,21 @@
 	justify-content: space-between;
 }
 
+.clicked {
+	background: #3399ff;
+	color: #ffffff;
+}
+
 .fifth-width {
 	width: 20%;
+}
+
+.box {
+	height: 20px;
+	border-top: 1px solid; 
+	border-left: 1px solid;
+	border-bottom: 1px solid;
+	border-right: 1px solid;
 }
 
 .box-left {
