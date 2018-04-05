@@ -18,6 +18,10 @@
 	width: 20%;
 }
 
+.third-width {
+	width:34%;
+}
+
 .box {
 	height: 20px;
 	border-top: 1px solid; 
@@ -27,21 +31,18 @@
 }
 
 .box-left {
-	height: 100px;
 	border-top: 1px solid; 
 	border-left: 1px solid;
 	border-bottom: 1px solid;
 }
 
 .box-center {
-	height: 100px;
 	border-top: 1px solid;
 	border-left: 1px solid;
 	border-bottom: 1px solid;
 }
 
 .box-right {
-	height: 100px;
 	border-top: 1px solid;
 	border-right: 1px solid;
 	border-left: 1px solid;

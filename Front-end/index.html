@@ -16,27 +16,101 @@
 		</div>
 	</div>
 	<div class="full-width" style="margin-top: 15px">
-		<div class="fifth-width box-left">
-			<div id="hour">
+		<div class="third-width box-left">
+			<div id="time">
+			    <span>Time</span>
 			</div>
 		</div>
-		<div class="fifth-width box-center">
-			<div id="airPressure">
+		<div class="third-width box-center pollution">
+			<div>
+			    <span>Air Pressure</span>
 			</div>
 		</div>
-		<div class="fifth-width box-center">
-			<div id="temperature">
+		<div class="third-width box-center temperature">
+			<div>
+			    <span>Temperature</span>
 			</div>
 		</div>
-		<div class="fifth-width box-center">
-			<div id="humidity">
+		<div class="third-width box-right temperature">
+			<div>
+			    <span>Humidity</span>
 			</div>
 		</div>
-		<div class="fifth-width box-right">
-			<div id="apm">
+		<div class="third-width box-right pollution">
+			<div>
+			    <span>Atmospheric particulate matter</span>
 			</div>
 		</div>
 	</div>
+	<div class="full-width" style="margin-top: 15px" id="current">
+		<div class="third-width box-left">
+			<span>Currently</span>
+		</div>
+		<div class="third-width box-center pollution airPressureCurrent">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-center temperature temperatureCurrent">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right temperature humidityCurrent">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right pollution apmCurrent">
+			<span class="field"></span>
+		</div>
+	</div>
+	<div class="full-width" style="margin-top: 15px" id="2h">
+		<div class="third-width box-left">
+			<span>2 hours</span>
+		</div>
+		<div class="third-width box-center pollution airPressure2H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-center temperature temperature2H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right temperature humidity2H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right pollution apm2H">
+			<span class="field"></span>
+		</div>
+	</div>
+	<div class="full-width" style="margin-top: 15px" id="5h">
+		<div class="third-width box-left">
+			<span>5 hours</span>
+		</div>
+		<div class="third-width box-center pollution airPressure5H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-center temperature temperature5H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right temperature humidity5H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right pollution apm5H">
+			<span class="field"></span>
+		</div>
+	</div>
+	<div class="full-width" style="margin-top: 15px" id="12h">
+		<div class="third-width box-left">
+			<span>12 hours</span>
+		</div>
+		<div class="third-width box-center pollution airPressure12H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-center temperature temperature12H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right temperature humidity12H">
+			<span class="field"></span>
+		</div>
+		<div class="third-width box-right pollution apm12H">
+			<span class="field"></span>
+		</div>
+	</div>
+	
 	<div style="margin-top: 15px">
 		<button type="button" onclick="showTemperature()" id="temperature-button">Temperature</button>
 		<button type="button" onclick="showPollution()" id="pollution-button">Pollution</button>
